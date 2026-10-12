@@ -9,7 +9,7 @@ import {
   X,
   type LucideIcon,
 } from "lucide-react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router";
 import { useHealth } from "@/lib/queries";
 import { cn } from "@/lib/utils";
@@ -36,8 +36,13 @@ export function AppShell() {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
 
+  // On route changes (not the first load, which would swallow the skip link)
+  // move focus to the new page's content so screen readers announce it.
+  const previousPath = useRef(location.pathname);
   useEffect(() => {
     setMenuOpen(false);
+    if (previousPath.current === location.pathname) return;
+    previousPath.current = location.pathname;
     document.getElementById("main")?.focus({ preventScroll: true });
     window.scrollTo(0, 0);
   }, [location.pathname]);
@@ -83,9 +88,10 @@ export function AppShell() {
                 <NavLink
                   to={item.to}
                   end={item.to === "/"}
+                  onClick={() => setMenuOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      "group flex items-center gap-3 rounded-sm px-3 py-2 text-ink-2 hover:bg-plate hover:text-ink",
+                      "group flex items-center gap-3 rounded-sm px-3 py-2 text-ink-2 no-underline hover:bg-plate hover:text-ink",
                       isActive && "bg-plate text-ink shadow-[inset_2px_0_0_var(--signal)]",
                     )
                   }
@@ -138,7 +144,7 @@ function Brand() {
 function ApiLamp() {
   const health = useHealth();
   let tone = "var(--muted-ink)";
-  let text = "Connecting…";
+  let text = "Connectingâ€¦";
   if (health.isError && !health.data) {
     tone = "var(--crit)";
     text = "API offline";

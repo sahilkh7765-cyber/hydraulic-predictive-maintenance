@@ -60,7 +60,7 @@ export const SEVERITY_COLOR: Record<Severity, string> = {
  * One-hue sequential ramp for magnitude on the dark surface: low values recede
  * toward the plate, high values are brightest (blue ramp steps 700 -> 250).
  */
-const RAMP = ["#1b2a3d", "#0d366b", "#184f95", "#256abf", "#3987e5", "#6da7ec", "#9ec5f4"] as const;
+const RAMP = ["#1b2a3d", "#0d366b", "#184f95", "#2465b8", "#3987e5", "#6da7ec", "#9ec5f4"] as const;
 export const rampColor = (t: number): { bg: string; fg: string } => {
   const clamped = Math.min(1, Math.max(0, Number.isFinite(t) ? t : 0));
   const i = Math.min(RAMP.length - 1, Math.round(clamped * (RAMP.length - 1)));

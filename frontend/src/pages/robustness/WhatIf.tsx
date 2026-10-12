@@ -218,7 +218,7 @@ function ProbabilityPairs({
                 <span className="num">{name(o.value)}</span> <span className="text-muted-ink">{o.label}</span>
               </td>
               <td className="py-1.5">
-                <div className="space-y-1" aria-label={`${fmt.pct(o.p)} then ${fmt.pct(m.p)}`}>
+                <div className="space-y-1" aria-hidden>
                   <div className="h-1.5 rounded-full bg-raised">
                     <div className="h-full rounded-full bg-muted-ink" style={{ width: `${o.p * 100}%` }} />
                   </div>

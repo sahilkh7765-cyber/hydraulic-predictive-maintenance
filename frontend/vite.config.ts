@@ -22,13 +22,10 @@ export default defineConfig({
     proxy: { "/api": { target: API_TARGET } },
   },
   build: {
+    // No manualChunks: forcing recharts into its own chunk also pulled shared
+    // helpers (clsx) into it, which made the entry chunk import charts eagerly.
+    // Rollup's own splitting keeps recharts in the lazily loaded page chunks.
     target: "es2022",
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          charts: ["recharts"],
-        },
-      },
-    },
+    chunkSizeWarningLimit: 600,
   },
 });
