@@ -5,6 +5,13 @@ engineering** rather than model tuning. Every number in this README was produced
 by running `src/train.py` and `src/evaluate.py` on the UCI *Condition monitoring
 of hydraulic systems* dataset.
 
+**Stack:** Python feature engineering + scikit-learn/XGBoost pipelines, served by a FastAPI API,
+with a React + TypeScript dashboard (Vite, Tailwind CSS, shadcn/ui).
+
+![Overview page: rig diagram and headline scores](docs/images/overview.png)
+
+![Predict page: one cycle scored by all four models](docs/images/predict.png)
+
 ---
 
 ## Abstract
