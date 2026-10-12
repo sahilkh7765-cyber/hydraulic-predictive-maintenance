@@ -1,0 +1,23 @@
+# Packages actually imported by this project.
+# Versions are lower bounds matching the environment the reported results were
+# produced in; newer point releases are expected to work.
+
+numpy>=1.26
+pandas>=2.0
+scipy>=1.11            # scipy.stats (skew, kurtosis), scipy.ndimage (rolling)
+scikit-learn>=1.4      # pipelines, models, metrics, permutation importance
+matplotlib>=3.8        # all figures
+seaborn>=0.13          # figure styling
+joblib>=1.3            # model persistence
+xgboost>=2.0           # gradient boosting (optional: see note below)
+streamlit>=1.30        # dashboard
+
+# jupyter is only needed to open notebooks/; the pipeline runs without it.
+jupyter>=1.0
+
+# NOTE ON XGBOOST
+# If xgboost cannot be installed on your machine, delete that line. The project
+# detects its absence at import time and falls back to scikit-learn's
+# HistGradientBoostingClassifier automatically (see src/models.py). Results will
+# differ slightly from those in outputs/reports/model_comparison.md, which were
+# produced with XGBoost.

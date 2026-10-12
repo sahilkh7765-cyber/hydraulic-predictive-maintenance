@@ -1,0 +1,13 @@
+Hydraulic accumulator - held-out test set (441 cycles)
+Model: random_forest | Feature set: engineered
+------------------------------------------------------------------------
+                                 precision    recall  f1-score   support
+
+    90 (close to total failure)     0.9699    1.0000    0.9847       161
+100 (severely reduced pressure)     1.0000    0.9375    0.9677        80
+115 (slightly reduced pressure)     1.0000    1.0000    1.0000        80
+         130 (optimal pressure)     1.0000    1.0000    1.0000       120
+
+                       accuracy                         0.9887       441
+                      macro avg     0.9925    0.9844    0.9881       441
+                   weighted avg     0.9890    0.9887    0.9886       441

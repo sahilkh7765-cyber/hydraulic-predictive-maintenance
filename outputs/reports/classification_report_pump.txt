@@ -1,0 +1,12 @@
+Internal pump leakage - held-out test set (441 cycles)
+Model: gradient_boosting | Feature set: selected
+------------------------------------------------------------------------
+                    precision    recall  f1-score   support
+
+    0 (no leakage)     1.0000    1.0000    1.0000       244
+  1 (weak leakage)     1.0000    1.0000    1.0000        99
+2 (severe leakage)     1.0000    1.0000    1.0000        98
+
+          accuracy                         1.0000       441
+         macro avg     1.0000    1.0000    1.0000       441
+      weighted avg     1.0000    1.0000    1.0000       441

@@ -1,0 +1,5 @@
+component,display_name,model,feature_set,n_train_cycles,n_test_cycles,accuracy,precision_macro,recall_macro,f1_macro,f1_weighted,roc_auc_ovr_macro,cv_f1_macro,block_cv_f1_macro,n_selected_features
+cooler,Cooler condition,gradient_boosting,baseline,1764,441,1.0,1.0,1.0,1.0,1.0,1.0,0.998304993436377,0.9953622874368524,17
+valve,Valve condition,random_forest,selected,1764,441,1.0,1.0,1.0,1.0,1.0,1.0,0.9945535351772467,0.9838861890527276,40
+pump,Internal pump leakage,gradient_boosting,selected,1764,441,1.0,1.0,1.0,1.0,1.0,1.0,0.9954113464641251,0.9682819189306098,40
+accumulator,Hydraulic accumulator,random_forest,engineered,1764,441,0.9886621315192744,0.9924698795180723,0.984375,0.9881128539015488,0.9885659436244987,0.9998807022357299,0.9921783542602896,0.9161361703682086,553

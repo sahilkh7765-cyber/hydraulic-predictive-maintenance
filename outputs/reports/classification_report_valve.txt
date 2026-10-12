@@ -1,0 +1,13 @@
+Valve condition - held-out test set (441 cycles)
+Model: random_forest | Feature set: selected
+------------------------------------------------------------------------
+                                  precision    recall  f1-score   support
+
+     73 (close to total failure)     1.0000    1.0000    1.0000        72
+                 80 (severe lag)     1.0000    1.0000    1.0000        72
+                  90 (small lag)     1.0000    1.0000    1.0000        72
+100 (optimal switching behavior)     1.0000    1.0000    1.0000       225
+
+                        accuracy                         1.0000       441
+                       macro avg     1.0000    1.0000    1.0000       441
+                    weighted avg     1.0000    1.0000    1.0000       441
