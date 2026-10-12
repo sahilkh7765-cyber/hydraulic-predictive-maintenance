@@ -8,8 +8,14 @@ function Slider({
   value,
   min = 0,
   max = 100,
+  id,
+  "aria-label": ariaLabel,
+  thumbLabels,
   ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
+}: React.ComponentProps<typeof SliderPrimitive.Root> & {
+  /** Accessible name per thumb; defaults to aria-label (with "start"/"end" for ranges). */
+  thumbLabels?: string[]
+}) {
   const _values = React.useMemo(
     () =>
       Array.isArray(value)
@@ -50,6 +56,12 @@ function Slider({
         <SliderPrimitive.Thumb
           data-slot="slider-thumb"
           key={index}
+          // The thumb is the focusable element, so it carries the id (for <label htmlFor>) and the name.
+          id={index === 0 ? id : undefined}
+          aria-label={
+            thumbLabels?.[index] ??
+            (_values.length > 1 && ariaLabel ? `${ariaLabel}, ${index === 0 ? "start" : "end"}` : ariaLabel)
+          }
           className="block size-4 shrink-0 rounded-full border border-primary bg-white shadow-sm ring-ring/50 transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
         />
       ))}

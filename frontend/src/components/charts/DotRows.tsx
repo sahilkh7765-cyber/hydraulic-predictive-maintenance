@@ -45,7 +45,9 @@ export function DotRows({
         const max = Math.max(...vals);
         return (
           <div key={r.key} className="grid grid-cols-[minmax(84px,150px)_1fr] items-center gap-3">
-            <span className="truncate text-sm">{r.label}</span>
+            <span className="truncate text-sm" title={r.label}>
+              {r.label}
+            </span>
             <div className="relative h-8">
               {ticks.map((t) => (
                 <span key={t} className="absolute top-0 bottom-0 w-px bg-hairline" style={{ left: x(t) }} />
