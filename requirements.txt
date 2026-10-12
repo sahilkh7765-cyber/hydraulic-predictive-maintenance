@@ -5,12 +5,19 @@
 numpy>=1.26
 pandas>=2.0
 scipy>=1.11            # scipy.stats (skew, kurtosis), scipy.ndimage (rolling)
-scikit-learn>=1.4      # pipelines, models, metrics, permutation importance
+scikit-learn==1.8.0    # pinned: models/*.joblib were pickled with 1.8.0 (needs Python >= 3.11)
 matplotlib>=3.8        # all figures
 seaborn>=0.13          # figure styling
 joblib>=1.3            # model persistence
-xgboost>=2.0           # gradient boosting (optional: see note below)
+xgboost==3.4.0         # gradient boosting (optional: see note below). Pinned: 3.4.1 fails to
+                       # unpickle the saved cooler/pump boosters ("input stream corrupted");
+                       # 3.4.0 loads them and reproduces outputs/metrics/test_results.csv exactly.
 streamlit>=1.30        # dashboard
+
+# Web API that serves the React frontend (api/).
+fastapi>=0.110
+uvicorn>=0.29
+python-multipart>=0.0.9   # multipart CSV upload in POST /api/predict/upload
 
 # jupyter is only needed to open notebooks/; the pipeline runs without it.
 jupyter>=1.0

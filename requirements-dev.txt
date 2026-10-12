@@ -1,0 +1,4 @@
+# Test-only dependencies for the API test suite (api/tests).
+-r requirements.txt
+pytest>=8.0
+httpx>=0.27            # required by fastapi.testclient.TestClient
