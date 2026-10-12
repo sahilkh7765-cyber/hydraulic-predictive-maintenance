@@ -1,0 +1,37 @@
+﻿/** Static types inferred from the runtime schemas - never written by hand. */
+import type { z } from "zod/mini";
+import type * as S from "./schemas";
+
+export type ComponentKey = z.infer<typeof S.ComponentKey>;
+export type Severity = z.infer<typeof S.Severity>;
+export type ClassInfo = z.infer<typeof S.ClassInfo>;
+export type ComponentInfo = z.infer<typeof S.ComponentInfo>;
+export type Health = z.infer<typeof S.Health>;
+export type Overview = z.infer<typeof S.Overview>;
+export type Headline = z.infer<typeof S.Headline>;
+export type Sensor = z.infer<typeof S.Sensor>;
+export type SensorsResponse = z.infer<typeof S.SensorsResponse>;
+export type LabelsResponse = z.infer<typeof S.LabelsResponse>;
+export type CycleResponse = z.infer<typeof S.CycleResponse>;
+export type Signal = z.infer<typeof S.Signal>;
+export type MetricsResponse = z.infer<typeof S.MetricsResponse>;
+export type CvRow = z.infer<typeof S.CvRow>;
+export type TestRow = z.infer<typeof S.TestRow>;
+export type ExperimentRow = z.infer<typeof S.ExperimentRow>;
+export type ImportanceResponse = z.infer<typeof S.ImportanceResponse>;
+export type ImportanceItem = z.infer<typeof S.ImportanceItem>;
+export type FeaturesResponse = z.infer<typeof S.FeaturesResponse>;
+export type ClassProbability = z.infer<typeof S.ClassProbability>;
+export type ComponentPrediction = z.infer<typeof S.ComponentPrediction>;
+export type PredictionResponse = z.infer<typeof S.PredictionResponse>;
+export type PipelineResponse = z.infer<typeof S.PipelineResponse>;
+export type EvaluationResponse = z.infer<typeof S.EvaluationResponse>;
+export type GeneralizationResponse = z.infer<typeof S.GeneralizationResponse>;
+export type TimelineResponse = z.infer<typeof S.TimelineResponse>;
+export type ErrorCasesResponse = z.infer<typeof S.ErrorCasesResponse>;
+export type ErrorProfileResponse = z.infer<typeof S.ErrorProfileResponse>;
+export type WhatIfOptions = z.infer<typeof S.WhatIfOptions>;
+export type WhatIfResponse = z.infer<typeof S.WhatIfResponse>;
+export type NoiseResponse = z.infer<typeof S.NoiseResponse>;
+export type SelectiveResponse = z.infer<typeof S.SelectiveResponse>;
+export type FiguresResponse = z.infer<typeof S.FiguresResponse>;

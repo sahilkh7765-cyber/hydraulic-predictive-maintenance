@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* The app is dark-only; shadcn's `dark:` variants are always active. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------------
+   Design tokens - see DESIGN.md. Every contrast pair was measured.
+   ------------------------------------------------------------------------ */
+:root {
+  color-scheme: dark;
+
+  --ground: #12171c;
+  --plate: #1a2027;
+  --raised: #222932;
+  --hairline: #2c3540;
+  --hairline-strong: #3a4552;
+
+  --ink: #e6ebf0;
+  --ink-2: #aeb9c4;
+  --muted-ink: #8d99a6;
+
+  --signal: #62b0ea;
+  --signal-ink: #0e1a24;
+
+  --ok: #3dbe8b;
+  --warn: #e9a23b;
+  --crit: #f0605a;
+  --unknown: #8d99a6;
+
+  /* categorical series, validated on --plate (dataviz validator, all pass) */
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --series-4: #c98500;
+
+  /* shadcn semantic tokens mapped onto the palette */
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--plate);
+  --card-foreground: var(--ink);
+  --popover: var(--raised);
+  --popover-foreground: var(--ink);
+  --primary: var(--signal);
+  --primary-foreground: var(--signal-ink);
+  --secondary: var(--raised);
+  --secondary-foreground: var(--ink);
+  --muted: var(--raised);
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--raised);
+  --accent-foreground: var(--ink);
+  --destructive: var(--crit);
+  --border: var(--hairline);
+  --input: var(--hairline-strong);
+  --ring: var(--signal);
+  --radius: 6px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ground: var(--ground);
+  --color-plate: var(--plate);
+  --color-raised: var(--raised);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted-ink: var(--muted-ink);
+  --color-signal: var(--signal);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-crit: var(--crit);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 6px;
+
+  --font-sans: "IBM Plex Sans", system-ui, "Segoe UI", sans-serif;
+  --font-plate: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  /* type scale: base 15, ratio 1.25 */
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 18px;
+  --text-base: 15px;
+  --text-base--line-height: 22px;
+  --text-lg: 19px;
+  --text-lg--line-height: 26px;
+  --text-xl: 23px;
+  --text-xl--line-height: 30px;
+  --text-2xl: 29px;
+  --text-2xl--line-height: 34px;
+  --text-3xl: 36px;
+  --text-3xl--line-height: 40px;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    background: var(--ground);
+  }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 22px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--signal) 35%, transparent);
+  }
+  a {
+    color: var(--signal);
+  }
+  code,
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+}
+
+@layer components {
+  /* Panel nameplate: condensed, sentence case - the engraved-label voice. */
+  .nameplate {
+    font-family: var(--font-plate);
+    font-weight: 500;
+    font-size: var(--text-sm);
+    line-height: 18px;
+    color: var(--ink-2);
+    letter-spacing: 0.01em;
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .prose-measure {
+    max-width: 68ch;
+  }
+}
+
+/* One orchestrated moment: status lamps light in sequence after a prediction. */
+@keyframes lamp-on {
+  from {
+    opacity: 0.15;
+    box-shadow: 0 0 0 0 transparent;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.lamp-sequence > * {
+  animation: lamp-on 420ms ease-out both;
+}
+.lamp-sequence > *:nth-child(2) {
+  animation-delay: 120ms;
+}
+.lamp-sequence > *:nth-child(3) {
+  animation-delay: 240ms;
+}
+.lamp-sequence > *:nth-child(4) {
+  animation-delay: 360ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
