@@ -56,6 +56,19 @@ export const SEVERITY_COLOR: Record<Severity, string> = {
   Unknown: "var(--unknown)",
 };
 
+/**
+ * One-hue sequential ramp for magnitude on the dark surface: low values recede
+ * toward the plate, high values are brightest (blue ramp steps 700 -> 250).
+ */
+const RAMP = ["#1b2a3d", "#0d366b", "#184f95", "#256abf", "#3987e5", "#6da7ec", "#9ec5f4"] as const;
+export const rampColor = (t: number): { bg: string; fg: string } => {
+  const clamped = Math.min(1, Math.max(0, Number.isFinite(t) ? t : 0));
+  const i = Math.min(RAMP.length - 1, Math.round(clamped * (RAMP.length - 1)));
+  // Text flips to dark from step 4 so every cell clears 4.5:1 (measured).
+  return { bg: RAMP[i] ?? RAMP[0], fg: i >= 4 ? "#0e1a24" : "#e6ebf0" };
+};
+export const RAMP_STOPS = RAMP;
+
 export const SEVERITY_ORDER: Record<Severity, number> = { Normal: 0, Degraded: 1, Critical: 2, Unknown: 1 };
 
 const nf = (digits: number) =>
