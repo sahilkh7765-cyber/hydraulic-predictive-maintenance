@@ -60,6 +60,8 @@ summary?
 ## Dataset
 
 **UCI / ZeMA gGmbH, Saarbrücken — Condition monitoring of hydraulic systems.**
+Download it from https://archive.ics.uci.edu/dataset/447/condition+monitoring+of+hydraulic+systems
+(CC BY 4.0, ZeMA gGmbH; also mirrored at https://doi.org/10.5281/zenodo.1323611).
 Place the extracted files directly in `data/raw/` (`PS1.txt … profile.txt`).
 
 | Property | Value |
