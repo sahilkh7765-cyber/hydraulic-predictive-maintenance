@@ -6,3 +6,5 @@ __pycache__/
 venv/
 .env
 docs/screenshots/
+.claude/settings.local.json
+data/raw/*.txt
