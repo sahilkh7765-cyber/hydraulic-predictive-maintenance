@@ -309,6 +309,70 @@ streamlit run app.py         # dashboard
 `train.py` accepts `--component valve` to run one component at a time and resume
 after an interruption. Full run: roughly 15–20 minutes on a single CPU core.
 
+## How to run the web app (Windows, PowerShell)
+
+The web app replaces the two Streamlit dashboards with a FastAPI service
+(`api/`, a thin wrapper around `src/`) and a React frontend (`frontend/`). It
+never trains anything: it loads the saved models and reads `outputs/`.
+
+**Prerequisites.** Python 3.11 or newer (the saved models were pickled with
+scikit-learn 1.8.0, which needs it), Node.js 20 or newer, the trained `models/`
+and `outputs/` folders, and the raw data in `data/raw/`.
+
+**1. One-time setup**, from the project root:
+
+```powershell
+# Python environment. If `py -3.12` is not available, install uv
+# (`python -m pip install uv`) and use: uv python install 3.12; uv venv .venv --python 3.12
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements-dev.txt    # requirements.txt + pytest/httpx
+
+# Frontend dependencies
+cd frontend
+npm install
+cd ..
+```
+
+If PowerShell refuses to run `Activate.ps1`, allow local scripts once with
+`Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`. The pipeline commands
+above (`python src/train.py`, `python src/evaluate.py`) work unchanged inside
+this environment.
+
+**2. Start the API** (terminal 1, project root, venv active):
+
+```powershell
+uvicorn api.main:app --port 8000
+```
+
+It answers immediately and loads the models in the background (about 3 s).
+Check it at <http://127.0.0.1:8000/api/health> or browse the endpoints at
+<http://127.0.0.1:8000/docs>. Endpoint shapes are documented in `api/README.md`.
+
+**3. Start the frontend** (terminal 2):
+
+```powershell
+cd frontend
+npm run dev
+```
+
+Open <http://localhost:5173>. Vite forwards `/api` to port 8000. While the API
+is warming up the app shows a "Loading models" screen, and if the API is not
+running it says so and reconnects on its own.
+
+**Tests and production build:**
+
+```powershell
+python -m pytest api/tests -q          # API tests (project root, venv active)
+cd frontend
+npm run typecheck                      # TypeScript strict
+npm run build                          # production bundle in frontend/dist
+npm run preview                        # serves dist on http://localhost:4173, /api proxied to 8000
+```
+
+`streamlit run app.py` and `streamlit run MLapp.py` still work while the web
+app reaches full parity.
+
 ## Project structure
 
 ```
@@ -332,8 +396,10 @@ hydraulic_predictive_maintenance/
     outputs/metrics/             model_results.csv, test_results.csv, feature_importance.csv
     outputs/reports/             model_comparison.md, feature_quality_report.csv, classification reports
     outputs/features/            engineered_features.csv, selected_features.csv
-    app.py
-    requirements.txt
+    api/                         FastAPI service for the web app (README, schemas, tests)
+    frontend/                    React + Vite + TypeScript web app (DESIGN.md has the design system)
+    app.py, MLapp.py             Streamlit dashboards (kept until the web app reaches parity)
+    requirements.txt, requirements-dev.txt
 ```
 
 ## Reproducibility
